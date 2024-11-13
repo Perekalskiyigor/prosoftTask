@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Прософт-системы</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            font-weight: bold;
+            color: #333;
+        }
+        label {
+            margin-top: 10px;
+            font-weight: bold;
+            display: inline-block;
+        }
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .output {
+            margin-top: 20px;
+            font-size: 16px;
+            font-weight: normal;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Прософт-системы</h1>
+
+    <form method="post" action="/submit">
+        <label for="orderNumber">№ заказа:</label>
+        <input type="text" id="orderNumber" name="orderNumber" placeholder="Введите номер заказа" required style="width: 10cm;"><br>
+        
+        <button type="submit">Запрос данных о заказе</button>
+    </form>
+
+    {% if order_data %}
+    <div class="output">
+        <h2>Информация о заказе</h2>
+
+        <label>Наименование изделия:</label>
+        <div>{{ order_data.product_name }}</div>
+
+        <label>Количество:</label>
+        <div>{{ order_data.quantity }}</div>
+
+        <label>Состав:</label>
+        <table>
+            <thead>
+                <tr>
+                    <th>Серийный номер</th>
+                    <th>Наименование</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in order_data.composition %}
+                <tr>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.quantity }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <label>Серийные номера:</label>
+        <table>
+            <thead>
+                <tr>
+                    <th>Код</th>
+					<th>Серийный номер</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for serial in order_data.serial_numbers %}
+                <tr>
+                    <td>{{ serial }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+</body>
+</html>
