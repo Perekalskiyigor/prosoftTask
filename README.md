@@ -24,3 +24,7 @@
    ```bash
    git clone https://github.com/Perekalskiyigor/prosoftTask.git
    cd prosoftTask
+2. Установите зависимости:
+    pip install -r requirements.txt
+3. Запуск из директории проекта
+    python app.py
