@@ -1,6 +1,8 @@
 import requests
 import json
 
+# код
+
 def OrderJsonData(order_number):
     """Получение всех данных по одному заказу и HTTP статус кода"""
     url = f"https://c.prosyst.ru/erp_game_razin/hs/rtk/order/{order_number}"
